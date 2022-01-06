@@ -8,8 +8,25 @@ class Genius extends CoresElementosHtml implements IGame {
   protected fase = 1; 
   protected pontuacao = 0;
 
-  atualizarEstado = () => {
-    //precisa implementar
+  atualizarEstado = (pontuacao: boolean, fase: boolean, reiniciar: boolean = false) => {
+    if(reiniciar){
+      this.pontuacao = 0;
+      document.getElementById("pontuacao").innerHTML = `Pontuação: <b>${this.pontuacao}</b>`;
+
+      this.fase = 1;
+      document.getElementById("fase").innerHTML = `Fase: <b>${this.fase}</b>`;
+      return;
+    }
+
+    if(pontuacao){
+      this.pontuacao++;
+      document.getElementById("pontuacao").innerHTML = `Pontuação: <b>${this.pontuacao}</b>`;
+    }
+
+    if(fase){
+      this.fase++;
+      document.getElementById("fase").innerHTML = `Fase: <b>${this.fase}</b>`;
+    }
   }
 
   jogar = () => {
@@ -54,14 +71,17 @@ class Genius extends CoresElementosHtml implements IGame {
       }
     } 
 
+    this.atualizarEstado(true, false);
     if(this.ordemCliques.length == this.ordemCores.length){
       let r = confirm("Você ganhou! Deseja continuar?");
       if(r){
+        this.atualizarEstado(false, true);
         this.jogar();
         return;
       }
       this.ordemCores = [];
       this.ordemCliques = [];
+      this.atualizarEstado(false, false, true);
     }
   }
 
@@ -69,16 +89,11 @@ class Genius extends CoresElementosHtml implements IGame {
     let r = confirm("Você perdeu! Deseja começar uma nova partida?");
     this.ordemCores = [];
     this.ordemCliques = [];
-    this.fase = 0;
-    this.pontuacao = 0;
+    this.atualizarEstado(false, false, true);
     if(r){
       this.jogar();
     }
     return;
-  }
-
-  proximoNivel() {
-      console.log('Passar para outro nível');
   }
 }
 

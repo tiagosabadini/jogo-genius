@@ -8,8 +8,8 @@ class Genius extends CoresElementosHtml implements IGame {
   protected fase = 1; 
   protected pontuacao = 0;
 
-  atualizarEstado = (pontuacao: boolean, fase: boolean, reiniciar: boolean = false) => {
-    if(reiniciar){
+  atualizarEstado = (incrementaPontuacao: boolean, incrementaFase: boolean, reiniciaJogo: boolean = false) => {
+    if(reiniciaJogo){
       this.pontuacao = 0;
       document.getElementById("pontuacao").innerHTML = `Pontuação: <b>${this.pontuacao}</b>`;
 
@@ -18,12 +18,12 @@ class Genius extends CoresElementosHtml implements IGame {
       return;
     }
 
-    if(pontuacao){
+    if(incrementaPontuacao){
       this.pontuacao++;
       document.getElementById("pontuacao").innerHTML = `Pontuação: <b>${this.pontuacao}</b>`;
     }
 
-    if(fase){
+    if(incrementaFase){
       this.fase++;
       document.getElementById("fase").innerHTML = `Fase: <b>${this.fase}</b>`;
     }
@@ -67,9 +67,9 @@ class Genius extends CoresElementosHtml implements IGame {
     for(let i in this.ordemCliques){
       if(this.ordemCliques[i] !== this.ordemCores[i]){
         this.fimDoJogo();
-        break;
+        return;
       }
-    } 
+    }
 
     this.atualizarEstado(true, false);
     if(this.ordemCliques.length == this.ordemCores.length){
@@ -92,6 +92,7 @@ class Genius extends CoresElementosHtml implements IGame {
     this.atualizarEstado(false, false, true);
     if(r){
       this.jogar();
+      return;
     }
     return;
   }

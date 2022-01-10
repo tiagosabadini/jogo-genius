@@ -358,12 +358,12 @@ function (_super) {
     _this.fase = 1;
     _this.pontuacao = 0;
 
-    _this.atualizarEstado = function (pontuacao, fase, reiniciar) {
-      if (reiniciar === void 0) {
-        reiniciar = false;
+    _this.atualizarEstado = function (incrementaPontuacao, incrementaFase, reiniciaJogo) {
+      if (reiniciaJogo === void 0) {
+        reiniciaJogo = false;
       }
 
-      if (reiniciar) {
+      if (reiniciaJogo) {
         _this.pontuacao = 0;
         document.getElementById("pontuacao").innerHTML = "Pontua\xE7\xE3o: <b>".concat(_this.pontuacao, "</b>");
         _this.fase = 1;
@@ -371,12 +371,12 @@ function (_super) {
         return;
       }
 
-      if (pontuacao) {
+      if (incrementaPontuacao) {
         _this.pontuacao++;
         document.getElementById("pontuacao").innerHTML = "Pontua\xE7\xE3o: <b>".concat(_this.pontuacao, "</b>");
       }
 
-      if (fase) {
+      if (incrementaFase) {
         _this.fase++;
         document.getElementById("fase").innerHTML = "Fase: <b>".concat(_this.fase, "</b>");
       }
@@ -466,7 +466,7 @@ function (_super) {
         if (_this.ordemCliques[i] !== _this.ordemCores[i]) {
           _this.fimDoJogo();
 
-          break;
+          return;
         }
       }
 
@@ -501,6 +501,7 @@ function (_super) {
 
     if (r) {
       this.jogar();
+      return;
     }
 
     return;
@@ -534,6 +535,15 @@ cores.forEach(function (elemento) {
     genius.checarOrdemDeCliques(codigoElemento);
   });
 });
+document.getElementById('btn-jogar').addEventListener('click', function (e) {
+  e.preventDefault();
+  var _a = [false, false, true],
+      atualizaPontuacao = _a[0],
+      atualizaFase = _a[1],
+      reiniciaJogo = _a[2];
+  genius.atualizarEstado(atualizaPontuacao, atualizaFase, reiniciaJogo);
+  genius.jogar();
+});
 },{"./Genius":"Genius.ts"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -562,7 +572,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55518" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51782" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

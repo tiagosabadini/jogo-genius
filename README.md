@@ -20,4 +20,10 @@ Caso você mande bem no layout, fale comigo :).
 
 ### Problemas conhecidos
   * A responsividade;
-  * Quando o usuário perde, o jogo avisa que perdeu e depois diz que ganhou;
+
+### Instruções para rodar o jogo
+* Faça o clone do repositório `git clone https://github.com/tiagosabadini/jogo-genius.git`
+* Atualize as dependências `npm i`
+* Rode o jogo `npm start`
+* Abra o navegador no endereço `http://localhost:1234`
+

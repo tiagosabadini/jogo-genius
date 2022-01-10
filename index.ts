@@ -9,6 +9,14 @@ cores.forEach((elemento) => {
     let codigoElemento = genius.Cores[elemento.id];
     genius.checarOrdemDeCliques(codigoElemento);   
   });
-})
+});
+
+document.getElementById('btn-jogar')
+  .addEventListener('click', (e) => {
+    e.preventDefault();
+    const [atualizaPontuacao, atualizaFase, reiniciaJogo] = [false, false, true];
+    genius.atualizarEstado(atualizaPontuacao, atualizaFase, reiniciaJogo);
+    genius.jogar();
+  });
 
 

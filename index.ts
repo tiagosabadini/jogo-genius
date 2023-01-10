@@ -8,6 +8,7 @@ cores.forEach((elemento) => {
   elemento.addEventListener('click', function(e){
     let codigoElemento = genius.Cores[elemento.id];
     genius.checarOrdemDeCliques(codigoElemento);   
+    
   });
 });
 
